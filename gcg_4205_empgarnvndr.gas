@@ -1,0 +1,591 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Employee Garnishment Vendor Codes")
+gui.SS_Form1..size(5690,5790)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_txtGarn.create(label,"Garnishment",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtGarn.create(textbox,"",True,1800,330,0,100,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtGarn.event(lostfocus,ddlgarn_click)
+gui.SS_Form1.cmd_txtGarn.create(button)
+gui.SS_Form1.cmd_txtGarn.caption("^")
+gui.SS_Form1.cmd_txtGarn.visible(True)
+gui.SS_Form1.cmd_txtGarn.size(330,330)
+gui.SS_Form1.cmd_txtGarn.zorder(0)
+gui.SS_Form1.cmd_txtGarn.position(1985,335)
+gui.SS_Form1.cmd_txtGarn.enabled(True)
+gui.SS_Form1.cmd_txtGarn.fontname("Arial")
+gui.SS_Form1.cmd_txtGarn.fontsize(8)
+gui.SS_Form1.cmd_txtGarn.event(click,cmd_txtgarn_click)
+gui.SS_Form1.lbl_txtDesc.create(label,"Description",True,1800,200,1,2455,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtDesc.create(textbox,"",True,1800,330,0,2455,335,True,0,Arial,8,16777215,1)
+gui.SS_Form1.lbl_txtVndr.create(label,"Vendor",True,1800,200,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtVndr.create(textbox,"",True,1800,330,0,100,1035,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtVndr.event(lostfocus,txtvndr_change)
+gui.SS_Form1.cmd_txtVndr.create(button)
+gui.SS_Form1.cmd_txtVndr.caption("^")
+gui.SS_Form1.cmd_txtVndr.visible(True)
+gui.SS_Form1.cmd_txtVndr.size(330,330)
+gui.SS_Form1.cmd_txtVndr.zorder(0)
+gui.SS_Form1.cmd_txtVndr.position(1985,1035)
+gui.SS_Form1.cmd_txtVndr.enabled(True)
+gui.SS_Form1.cmd_txtVndr.fontname("Arial")
+gui.SS_Form1.cmd_txtVndr.fontsize(8)
+gui.SS_Form1.cmd_txtVndr.event(click,cmd_txtvndr_click)
+gui.SS_Form1.lbl_txtName.create(label,"Name",True,1800,200,1,2455,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtName.create(textbox,"",True,1800,330,0,2455,1035,True,0,Arial,8,16777215,1)
+gui.SS_Form1.lvw1.create(listview)
+gui.SS_Form1.lvw1.view(3)
+gui.SS_Form1.lvw1.addlistviewcolumn("Garnishment",1200,0)
+gui.SS_Form1.lvw1.addlistviewcolumn("Description",2800,0)
+gui.SS_Form1.lvw1.addlistviewcolumn("Vendor",1200,0)
+gui.SS_Form1.lvw1.visible(True)
+gui.SS_Form1.lvw1.size(5340,2000)
+gui.SS_Form1.lvw1.zorder(0)
+gui.SS_Form1.lvw1.position(100,1535)
+gui.SS_Form1.lvw1.enabled(True)
+gui.SS_Form1.lvw1.fontname("Arial")
+gui.SS_Form1.lvw1.fontsize(8)
+gui.SS_Form1.lvw1.event(itemclick,lvw1_itemclick)
+gui.SS_Form1.cmd_lvw1Add.create(button)
+gui.SS_Form1.cmd_lvw1Add.caption("Add")
+gui.SS_Form1.cmd_lvw1Add.visible(True)
+gui.SS_Form1.cmd_lvw1Add.size(1000,330)
+gui.SS_Form1.cmd_lvw1Add.zorder(0)
+gui.SS_Form1.cmd_lvw1Add.position(4340,1035)
+gui.SS_Form1.cmd_lvw1Add.enabled(True)
+gui.SS_Form1.cmd_lvw1Add.fontname("Arial")
+gui.SS_Form1.cmd_lvw1Add.fontsize(8)
+gui.SS_Form1.cmd_lvw1Add.event(click,cmd_lvw1add_click)
+gui.SS_Form1.cmd_lvw1Add.SetInternationalID(7600)
+gui.SS_Form1.cmd_lvw1Delete.create(button)
+gui.SS_Form1.cmd_lvw1Delete.caption("Delete")
+gui.SS_Form1.cmd_lvw1Delete.visible(True)
+gui.SS_Form1.cmd_lvw1Delete.size(1000,330)
+gui.SS_Form1.cmd_lvw1Delete.zorder(0)
+gui.SS_Form1.cmd_lvw1Delete.position(100,3620)
+gui.SS_Form1.cmd_lvw1Delete.enabled(True)
+gui.SS_Form1.cmd_lvw1Delete.fontname("Arial")
+gui.SS_Form1.cmd_lvw1Delete.fontsize(8)
+gui.SS_Form1.cmd_lvw1Delete.event(click,cmd_lvw1delete_click)
+gui.SS_Form1.cmd_lvw1Delete.SetInternationalID(171500)
+gui.SS_Form1.cmd_lvw1Clear.create(button)
+gui.SS_Form1.cmd_lvw1Clear.caption("Clear")
+gui.SS_Form1.cmd_lvw1Clear.visible(True)
+gui.SS_Form1.cmd_lvw1Clear.size(1000,330)
+gui.SS_Form1.cmd_lvw1Clear.zorder(0)
+gui.SS_Form1.cmd_lvw1Clear.position(1185,3620)
+gui.SS_Form1.cmd_lvw1Clear.enabled(True)
+gui.SS_Form1.cmd_lvw1Clear.fontname("Arial")
+gui.SS_Form1.cmd_lvw1Clear.fontsize(8)
+gui.SS_Form1.cmd_lvw1Clear.event(click,cmd_lvw1clear_click)
+gui.SS_Form1.cmd_lvw1Clear.SetInternationalID(106700)
+gui.SS_Form1.txtGarn.tabstop(true)
+gui.SS_Form1.txtGarn.tabindex(1)
+gui.SS_Form1.cmd_txtGarn.tabstop(true)
+gui.SS_Form1.cmd_txtGarn.tabindex(2)
+gui.SS_Form1.txtVndr.tabstop(true)
+gui.SS_Form1.txtVndr.tabindex(3)
+gui.SS_Form1.cmd_txtVndr.tabstop(true)
+gui.SS_Form1.cmd_txtVndr.tabindex(4)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.iOrd.Declare(Long,0)
+Variable.Global.sKey.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+
+'F.ODBC.Connection!Con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'F.Intrinsic.Control.CallSub(Fillview)
+'
+'Gui.SS_Form1..Show
+
+'F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+V.Local.iFor.Declare(Long)
+V.Local.sEmpl.Declare(String)
+
+F.ODBC.Connection!Con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+
+
+'populate hook to change button text
+F.Intrinsic.Control.If(V.Caller.Hook,=,15340)
+	V.Passed.000110.Set("Garn/Vndr")
+	F.Intrinsic.Control.CallSub(Unload)
+
+'script1 hook
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,15360)
+'make sure employee has been selected
+'pad empl# from screen
+	F.Intrinsic.String.LPad(V.Passed.000003,"0",5,V.Local.sEmpl)
+	F.Intrinsic.Control.If(V.Local.sEmpl,=,"00000")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.CallSub(Fillview)
+	Gui.SS_Form1..Show
+
+'else end
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+
+F.ODBC.Connection!Con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+program.sub.cmd_lvw1delete_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvw1delete_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+
+V.Local.sDelete.Declare(String)
+V.Local.iOrdinal.Declare(Long)
+V.Local.sEmpl.Declare(String)
+
+
+'pad empl# from screen
+F.Intrinsic.String.LPad(V.Passed.000003,"0",5,V.Local.sEmpl)
+'F.Intrinsic.String.LPad("00012","0",5,V.Local.sEmpl)
+'delete the record from the table
+F.Intrinsic.String.Concat("delete  from GCG_4205_EmpGarnVndr where Employee='",V.Local.sEmpl,"' and Garn_Code='",V.Screen.SS_Form1!txtGarn.Text,"'",V.Local.sDelete)
+F.ODBC.Connection!Con.Execute(V.Local.sDelete)
+
+'remove the line from the view
+Gui.SS_Form1.lvw1.RemoveItem(V.Global.sKey)
+'call sub to clear text boxes
+F.Intrinsic.Control.CallSub(Cmd_lvw1clear_click)
+
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvw1delete_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvw1delete_click.End
+
+program.sub.cmd_lvw1clear_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvw1clear_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+Gui.SS_Form1.txtGarn.Text("")
+Gui.SS_Form1.txtDesc.Text("")
+Gui.SS_Form1.txtName.Text("")
+Gui.SS_Form1.txtVndr.Text("")
+
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvw1clear_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvw1clear_click.End
+
+program.sub.cmd_lvw1add_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvw1add_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+
+V.Local.sEmpl.Declare(String)
+V.Local.sSel.Declare(String)
+
+'if Garnishment and Vendor haven't been specified, exit sub
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtGarn.Text,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtVndr.Text,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'pad empl# from screen
+F.Intrinsic.String.LPad(V.Passed.000003,"0",5,V.Local.sEmpl)
+'F.Intrinsic.String.LPad("00012","0",5,V.Local.sEmpl)
+
+'add record to table
+F.Intrinsic.String.Concat("select * from GCG_4205_EmpGarnVndr where Employee='",V.Local.sEmpl,"' and Garn_Code='",V.Screen.SS_Form1!txtGarn.Text,"'",V.Local.sSel)
+F.ODBC.Connection!Con.OpenRecordsetRW("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,True)
+		F.ODBC.Con!rstSel.AddNew
+			F.ODBC.Con!rstSel.Set!BIRUNID(1)
+			F.ODBC.Con!rstSel.Set!Employee(V.Local.sEmpl)
+			F.ODBC.Con!rstSel.Set!Garn_Code(V.Screen.SS_Form1!txtGarn.Text)
+			F.ODBC.Con!rstSel.Set!Garn_Description(V.Screen.SS_Form1!txtDesc.Text)
+	F.Intrinsic.Control.EndIf
+		'uipdate vendor
+			F.ODBC.Con!rstSel.Set!Vendor(V.Screen.SS_Form1!txtVndr.Text)
+			F.ODBC.Con!rstSel.Set!Name_Vendor(V.Screen.SS_Form1!txtName.Text)
+		F.ODBC.Con!rstSel.Update
+
+F.ODBC.Con!rstSel.Close
+'clear the view, so it can be re-populated in numerical order
+Gui.SS_Form1.lvw1.ClearItems
+'call sub to re-fill the view
+F.Intrinsic.Control.CallSub(Fillview)
+'call sub to clear the text boxes
+F.Intrinsic.Control.CallSub(Cmd_lvw1clear_click)
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvw1add_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvw1add_click.End
+
+program.sub.cmd_txtvndr_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtvndr_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.UI.CommonBrowser(300,"",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtVndr.Text(V.Local.sRet(0))
+	Gui.SS_Form1.txtName.Text(V.Local.sRet(1))
+F.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtvndr_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtvndr_click.End
+
+program.sub.lvw1_itemclick.start
+F.Intrinsic.Control.SetErrorHandler("lvw1_itemclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+
+V.Local.sRet.Declare(String)
+V.Local.sOrd.Declare(String)
+V.Local.iOrd.Declare(Long)
+V.Local.sSel.Declare(String)
+
+'get the item key
+Gui.SS_Form1.lvw1.RetrieveSelectedListItems(V.Global.sKey)
+'get the item ordinal
+Gui.SS_Form1.lvw1.RetrieveItemOrdinal(V.Global.sKey,V.Global.iOrd)
+
+'get the line of text
+V.Local.sRet.Set(V.Screen.SS_Form1!lvw1.ListItemTextExtended(V.Global.iOrd))
+'split to get trmnl and comment
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'write values to text boxes
+	Gui.SS_Form1.txtGarn.Text(V.Local.sRet(0))
+	Gui.SS_Form1.txtDesc.Text(V.Local.sRet(1))
+	Gui.SS_Form1.txtVndr.Text(V.Local.sRet(2))
+
+
+F.Intrinsic.String.Concat("select Name_Vendor from Vendor_master where Vendor='",V.Local.sRet(2),"'",V.Local.sSel)
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		gui.SS_Form1.txtName.Text(V.ODBC.Con!rstSel.FieldValTrim!Name_Vendor)
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("lvw1_itemclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.lvw1_itemclick.End
+
+program.sub.ddlgarn_click.start
+F.Intrinsic.Control.SetErrorHandler("ddlgarn_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+V.Local.sSel.Declare(String)
+V.Local.sRet.Declare(String)
+
+' get the garnishment descriptions
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel","select GARN_Desc_1, GARN_Desc_2, GARN_Desc_3, GARN_Desc_4, GARN_Desc_5 from "PAY_GARN_DESCR" where WSA_Type='GARN' ")
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		F.ODBC.Con!rstSel.Record2String(V.Local.sRet)
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+'split the record
+F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'push the values to 1-5 positions
+F.Intrinsic.Variable.PushArray(V.Local.sRet,V.Local.sRet)
+'if a garnishment is selected
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtGarn.Text,<>,"")
+'garnishments are only 1-5
+	F.Intrinsic.Control.If(V.Screen.SS_Form1!txtGarn.Text,<,"1")
+		F.Intrinsic.UI.Msgbox("Invalid Garnishment Code.  Please re-enter a code between 1-5.")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.elseIf(V.Screen.SS_Form1!txtGarn.Text,>,"5")
+		F.Intrinsic.UI.Msgbox("Invalid Garnishment Code.  Please re-enter a code between 1-5.")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+'put the correct description into the box
+	Gui.SS_Form1.txtDesc.Text(V.Local.sRet(v.Screen.SS_Form1!txtGarn.Text))
+'otherwise, leave it blank
+F.Intrinsic.Control.Else
+	Gui.SS_Form1.txtDesc.Text("")
+F.Intrinsic.Control.EndIf
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("ddlgarn_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.ddlgarn_click.End
+
+Program.Sub.FillView.Start
+F.Intrinsic.Control.SetErrorHandler("FillView_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+V.Local.sSel.Declare(String)
+V.Local.sEmpl.Declare(String)
+
+
+'F.Intrinsic.Debug.InvokeDebugger
+'
+'F.Intrinsic.Debug.Stop
+
+
+'pad empl# from screen
+F.Intrinsic.String.LPad(V.Passed.000003,"0",5,V.Local.sEmpl)
+'F.Intrinsic.String.LPad("00012","0",5,V.Local.sEmpl)
+
+'look for sequences and load list view
+'F.Intrinsic.String.Concat("Select *  from GCG_4205_EmpGarnVndr where Employee='{0}' and BIRUNID = 1",V.Local.sEmpl, order by Garn_Code",V.Local.sSel)
+f.Intrinsic.String.Build("Select *  from GCG_4205_EmpGarnVndr where Employee= '{0}' and BIRUNID = 1 order by Garn_Code",V.Local.sEmpl,V.Local.sSel)
+
+F.ODBC.Connection!Con.OpenLocalRecordsetRO("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.DoUntil(V.ODBC.Con!rstSel.EOF,=,True)
+		Gui.SS_Form1.lvw1.AddListItem(V.ODBC.Con!rstSel.FieldVal!Garn_Code,V.ODBC.Con!rstSel.FieldVal!Garn_Code)
+		Gui.SS_Form1.lvw1.SetListItemSubItemText(V.ODBC.Con!rstSel.FieldVal!Garn_Code,1,V.ODBC.Con!rstSel.FieldVal!Garn_Description)
+		Gui.SS_Form1.lvw1.SetListItemSubItemText(V.ODBC.Con!rstSel.FieldVal!Garn_Code,2,V.ODBC.Con!rstSel.FieldVal!Vendor)
+	F.ODBC.Con!rstSel.MoveNext
+	F.Intrinsic.Control.Loop
+F.ODBC.Con!rstSel.Close
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("FillView_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.FillView.End
+
+program.sub.txtvndr_change.start
+F.Intrinsic.Control.SetErrorHandler("txtvndr_change_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+V.Local.sSel.Declare(String)
+
+F.Intrinsic.String.Concat("select Name_Vendor from Vendor_master where Vendor='",V.Screen.SS_Form1!txtVndr.Text,"'",V.Local.sSel)
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		Gui.SS_Form1.txtName.Text(V.ODBC.Con!rstSel.FieldValTrim!Name_Vendor)
+	F.Intrinsic.Control.Else
+	'clear an existing value
+		Gui.SS_Form1.txtName.Text("")
+		F.Intrinsic.UI.Msgbox("invalid Vendor.  Please re-enter.")
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtvndr_change_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtvndr_change.End
+
+program.sub.cmd_txtgarn_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtgarn_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+
+
+V.Local.sSel.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sCol.Declare(String)
+V.Local.iWIdth.Declare(Long)
+
+'F.Intrinsic.Debug.InvokeDebugger
+F.Intrinsic.Debug.Stop
+'
+'F.Intrinsic.UI.Msgbox("")
+
+' get the garnishment descriptions
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel","select '1@', GARN_Desc_1, '&2@', GARN_Desc_2,'&3@', GARN_Desc_3,'&4@', GARN_Desc_4, '&5@',GARN_Desc_5 from "PAY_GARN_DESCR" where  WSA_Type='GARN' ")
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		F.ODBC.Con!rstSel.Record2String(V.Local.sSel)
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+'replace delimiters
+F.Intrinsic.String.Replace(V.Local.sSel,"*!*","",V.Local.sSel)
+F.Intrinsic.String.Split("Code*!*Description","*!*",V.Local.sCol)
+F.Intrinsic.String.Split("1500*!*3000","*!*",V.Local.iWIdth)
+F.Intrinsic.UI.BrowserFromString("Garnishment",V.Local.sSel,"@","&",V.Local.sCol,V.Local.iWIdth,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtGarn.Text(V.Local.sRet(0))
+	Gui.SS_Form1.txtDesc.Text(V.Local.sRet(1))
+F.Intrinsic.Control.EndIf
+
+
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtgarn_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtgarn_click.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_3626_EmpGarnishment_Vndr_rpt.ga$}$JCT$}$6/28/2012$}$False
+${$1$}$$}$$}$1$}$15360$}$PRS0002A-SCRIPT-1-HOOK$}$6/28/2012 8:02:16 AM$}$(Program: PR0002GI; Screen: PRS0002A)
+
+${$1$}$$}$$}$0$}$15340$}$PRS0002A-POPULATE-HOOK$}$6/28/2012 8:00:13 AM$}$(Program: PR0002GI; Screen: PRS0002A)
+Change Script 1 text
+
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$For Cadilalc Products
+Quote 3626
+A maintenance screen and table to assign Vendor Id's to Garnishment codes for employees. A report that prints the Employee, Garnishment-Vendor code information.
+Program.Sub.Comments.End
+
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Employee Garnishment Vendor Codes
+SS_Form1.CTRL{{NAME::txtGarn\\TYPE::2\\CAPTION::Garnishment\\RANGE::lvw1\\TABSTOP::1\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtDesc\\TYPE::2\\CAPTION::Description\\RANGE::lvw1\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtVndr\\TYPE::2\\CAPTION::Vendor\\RANGE::lvw1\\TABSTOP::2\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtName\\TYPE::2\\CAPTION::Name\\GROUP::2\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::lvw1\\TYPE::7\\GROUP::3\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
