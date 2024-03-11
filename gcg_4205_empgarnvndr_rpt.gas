@@ -1,0 +1,347 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Employee Garnishment by Vendor Report")
+gui.SS_Form1..size(2250,1825)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1..event(unload,unload)
+gui.SS_Form1.lbl_dtpPayDte.create(label,"Pay Date",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.dtpPayDte.create(datepicker)
+gui.SS_Form1.dtpPayDte.visible(True)
+gui.SS_Form1.dtpPayDte.size(1800,345)
+gui.SS_Form1.dtpPayDte.position(100,335)
+gui.SS_Form1.dtpPayDte.enabled(True)
+gui.SS_Form1.dtpPayDte.fontname("Arial")
+gui.SS_Form1.cmdPrnt.create(button)
+gui.SS_Form1.cmdPrnt.Caption("Print")
+gui.SS_Form1.cmdPrnt.visible(True)
+gui.SS_Form1.cmdPrnt.size(1000,360)
+gui.SS_Form1.cmdPrnt.position(100,850)
+gui.SS_Form1.cmdPrnt.enabled(True)
+gui.SS_Form1.cmdPrnt.fontname("Arial")
+gui.SS_Form1.cmdPrnt.fontsize(8)
+gui.SS_Form1.cmdPrnt.event(click,cmdprnt_click)
+gui.SS_Form1.dtpPayDte.tabstop(true)
+gui.SS_Form1.dtpPayDte.tabindex(1)
+gui.SS_Form1.cmdPrnt.tabstop(true)
+gui.SS_Form1.cmdPrnt.tabindex(2)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+
+Variable.UDT.Empl.Define("lBIRunID",long)
+Variable.UDT.Empl.Define("Employee",String,Employee)
+Variable.UDT.Empl.Define("Name_Employee",String)
+Variable.UDT.Empl.Define("Garn_Code",String,Garn_Code)
+Variable.UDT.Empl.Define("Garn_Description",String,Garn_Description)
+Variable.UDT.Empl.Define("Garn_Amount",Float)
+Variable.UDT.Empl.Define("Vendor",String,Vendor)
+Variable.UDT.Empl.Define("Name_Vendor",String,"Name_Vendor")
+Variable.uGlobal.uEmpl.Declare("Empl")
+
+Variable.UDT.uGarn.Define("Prs_Desc_1",String,Prs_Desc_1)
+Variable.UDT.uGarn.Define("Prs_Desc_2",String,Prs_Desc_2)
+Variable.UDT.uGarn.Define("Prs_Desc_3",String,Prs_Desc_3)
+Variable.UDT.uGarn.Define("Prs_Desc_4",String,Prs_Desc_4)
+Variable.UDT.uGarn.Define("Prs_Desc_5",String,Prs_Desc_5)
+Variable.uGlobal.uGarn.Declare("uGarn")
+
+Variable.UDT.EmpMstr.Define("Employee",String,Employee)
+Variable.UDT.EmpMstr.Define("Name",String,Name)
+Variable.UDT.EmpMstr.Define("Garn_1",Float,Garn_1)
+Variable.UDT.EmpMstr.Define("Garn_2",Float,Garn_2)
+Variable.UDT.EmpMstr.Define("Garn_3",Float,Garn_3)
+Variable.UDT.EmpMstr.Define("Garn_4",Float,Garn_4)
+Variable.UDT.EmpMstr.Define("Garn_5",Float,Garn_5)
+Variable.uGlobal.uEmpMstr.Declare("EmpMstr")
+
+Variable.UDT.Earnings.Define("Employee",String,Employee)
+Variable.UDT.Earnings.Define("Garn_1",Float,Garn_1)
+Variable.UDT.Earnings.Define("Garn_2",Float,Garn_2)
+Variable.UDT.Earnings.Define("Garn_3",Float,Garn_3)
+Variable.UDT.Earnings.Define("Garn_4",Float,Garn_4)
+Variable.UDT.Earnings.Define("Garn_5",Float,Garn_5)
+Variable.uGlobal.uEarnings.Declare("Earnings")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+F.ODBC.Connection!Con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+Gui.SS_Form1..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr_rpt.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+F.ODBC.Connection!Con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr_rpt.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Unload.End
+
+program.sub.cmdprnt_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdprnt_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+Gui.SS_Form1.cmdPrnt.Enabled(false)
+Gui.SS_Form1.dtpPayDte.Enabled(false)
+
+
+V.Local.iRptID.Declare(Long)
+V.Local.sRptLoc.Declare(String)
+V.Local.sParams.Declare(String)
+V.Local.sValues.Declare(String)
+V.Local.sSel.Declare(String)
+V.Local.sChkDte.Declare(String)
+V.Global.lBIRunID.Declare(Long)
+V.global.lLogID.Declare(Long)
+V.Local.iret.Declare(Long)
+
+
+F.Intrinsic.String.Format(V.Screen.SS_Form1!dtpPayDte.Value,"YYYY-MM-DD",V.Local.sChkDte)
+
+F.Global.BI.GetRunID(v.Global.lBIRunID)
+F.Intrinsic.Control.If(V.Ambient.IsInIDE,=,True)
+'        F.Global.BI.StartLogging(V.global.lBIRunID,2555,0,"",V.global.lLogID)
+F.Intrinsic.Control.Else
+        F.Global.BI.StartLogging(V.global.lBIRunID,-1,-1,"",V.global.lLogID)
+F.Intrinsic.Control.EndIf
+
+
+
+
+'see if pay date is valid
+F.Intrinsic.String.Concat("select Employee from v_Pay_Hist_Ded where Earnings='DD' and Check_Date='",V.Local.sChkDte,"' ",V.Local.sSel)
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,True)
+'if no records found, give message and allow them to re-enter the date
+		F.Intrinsic.UI.Msgbox("Pay data not found for date entered")
+		Gui.SS_Form1.cmdPrnt.Enabled(True)
+		Gui.SS_Form1.dtpPayDte.Enabled(True)
+		F.ODBC.Con!rstSel.Close
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+
+
+'F.Intrinsic.Debug.InvokeDebugger
+'
+'F.Intrinsic.Debug.Stop
+
+
+
+
+F.Intrinsic.Control.CallSub(Buildreporttable)
+
+
+
+
+F.Global.BI.StopLogging(v.Global.lLogid)
+
+'V.Local.sParams.Set("Trmnl")
+'F.Intrinsic.String.Split("Trmnl*!*PayDate","*!*",V.Local.sParams)
+F.Intrinsic.String.Split("PayDate","*!*",V.Local.sParams)
+F.Intrinsic.String.Concat(V.Caller.Terminal,"*!*",V.Screen.SS_Form1!dtpPayDte.Value,V.Local.sValues)
+F.Intrinsic.String.Split(V.Local.sValues,"*!*",V.Local.sValues)
+
+V.Local.sValues.set(V.Screen.SS_Form1!dtpPayDte.Value)
+
+'F.Intrinsic.String.Concat(V.Caller.BusintDir,"\Custom\GCG_4205_EmpGarnVndr.rpt",V.Local.sRptLoc)
+'F.Global.BI.InitializeReport("GCG_4205_EmpGarnVndr.rpt",V.Local.sRptLoc,V.Local.iRptID)
+'F.Global.BI.PrintReport(V.Local.iRptID,0,V.Local.sParams,V.Local.sValues,False)
+
+V.Local.sParams.Set("PayDate")
+'F.Intrinsic.Variable.udtsetmembervalue(V.uGlobal.uEmpl!lBIRunID,V.global.lBIRunID)
+'F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uEmpl!lBIRunID,"BIRUNID")
+
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+
+F.Global.BI.RunReportPreProcessor(V.global.lBIRunID,V.global.lLogid,V.Local.sParams,V.Local.sValues,"",-1,True,"",-1,"",-1,"","",V.Local.iret)
+
+
+
+F.Intrinsic.Control.CallSub(Unload)
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdprnt_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr_rpt.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdprnt_click.End
+
+Program.Sub.BuildReportTable.Start
+F.Intrinsic.Control.SetErrorHandler("BuildReportTable_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+
+'F.Intrinsic.Debug.InvokeDebugger
+'
+'F.Intrinsic.Debug.Stop
+
+V.Local.sSel.Declare(String)
+V.Local.iFor.Declare(Long)
+V.Local.sChkDte.Declare(String)
+
+F.Intrinsic.String.Format(V.Screen.SS_Form1!dtpPayDte.Value,"YYYY-MM-DD",V.Local.sChkDte)
+'get employees with garnishment Vendors
+V.uGlobal.uEmpl.Redim(-1,-1)
+F.ODBC.Connection!Con.OpenRecordsetRO(" rstSel","select Employee, Garn_Code, Garn_Description, Vendor, Name_Vendor from GCG_4205_EmpGarnVndr where BIRUNID = 1 order by Employee, Garn_Code")
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		F.Intrinsic.Variable.LoadUDTFromRecordset("Con","rstSel","v.uGlobal.uEmpl",False)
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+'if no records are found, exit
+F.Intrinsic.Control.If(V.uGlobal.uEmpl!Employee.UBound,=,-1)
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.endif
+F.Intrinsic.Debug.Stop
+'get employee pay in the pay period
+V.uGlobal.uEarnings.Redim(-1,-1)
+F.Intrinsic.String.Concat("select Employee, Garn_1, Garn_2, Garn_3, Garn_4, Garn_5 from v_Pay_Hist_Ded where Earnings='DD' and Check_Date='",V.Local.sChkDte,"' ",V.Local.sSel)
+	F.Intrinsic.String.Concat(V.Local.sSel," and (Garn_1<>0 or Garn_2<>0 or Garn_3<>0 or Garn_4<>0 or Garn_5<>0) order by Employee ",V.Local.sSel)
+F.ODBC.Connection!Con.OpenRecordsetRO("rstSel",V.Local.sSel)
+	F.Intrinsic.Control.If(V.ODBC.Con!rstSel.EOF,=,False)
+		F.Intrinsic.Variable.LoadUDTFromRecordset("Con","rstSel","v.uGlobal.uEarnings",False)
+	F.Intrinsic.Control.EndIf
+F.ODBC.Con!rstSel.Close
+'if no records are found, exit
+F.Intrinsic.Control.If(V.uGlobal.uEmpl!Employee.UBound,=,-1)
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'====================================================================
+'flag all records
+F.Intrinsic.Variable.UDTFlagAll(V.uGlobal.uEmpl)
+'for each earning recordm set the garnishment to the udt that wioll be saved to the table
+F.Intrinsic.Control.For(V.Local.iFor,V.uGlobal.uEarnings!Employee.LBound,V.uGlobal.uEarnings!Employee.UBound,1)
+'remove flag, if found on the current pay period
+	F.Intrinsic.Variable.UDTMultiUnFlag(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee,V.uGlobal.uEmpl!Garn_Code,"1",V.uGlobal.uEmpl!Garn_Amount,V.uGlobal.uEarnings(v.Local.iFor)!Garn_1)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee,V.uGlobal.uEmpl!Garn_Code,"2",V.uGlobal.uEmpl!Garn_Amount,V.uGlobal.uEarnings(v.Local.iFor)!Garn_2)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee,V.uGlobal.uEmpl!Garn_Code,"3",V.uGlobal.uEmpl!Garn_Amount,V.uGlobal.uEarnings(v.Local.iFor)!Garn_3)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee,V.uGlobal.uEmpl!Garn_Code,"4",V.uGlobal.uEmpl!Garn_Amount,V.uGlobal.uEarnings(v.Local.iFor)!Garn_4)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uEmpl!Employee,V.uGlobal.uEarnings(v.Local.iFor)!Employee,V.uGlobal.uEmpl!Garn_Code,"5",V.uGlobal.uEmpl!Garn_Amount,V.uGlobal.uEarnings(v.Local.iFor)!Garn_5)
+F.Intrinsic.Control.Next(V.Local.iFor)
+'delete any records still flagged
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uEmpl)
+'flag 0 valued for deletion
+F.Intrinsic.Variable.UDTMultiFlag(V.uGlobal.uEmpl!Garn_Amount,0)
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uEmpl)
+
+'set the field reference for the trmnl and amount
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uEmpl!Garn_Amount,"Garn_Amount")
+'F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uEmpl!Trmnl,"Trmnl")
+'set the Terminal
+'F.Intrinsic.Variable.UDTSetMemberValue(V.uGlobal.uEmpl!Trmnl,V.Caller.Terminal)
+
+'====================================================================
+'clear edisting records for the calling terminal
+
+
+
+F.Intrinsic.Variable.udtsetmembervalue(V.uGlobal.uEmpl!lBIRunID,V.global.lBIRunID)
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uEmpl!lBIRunID,"BIRUNID")
+
+'F.Intrinsic.Debug.InvokeDebugger
+'
+'F.Intrinsic.Debug.Stop
+'
+'f.Intrinsic.UI.Msgbox("")
+
+'F.Intrinsic.String.Concat("delete from GCG_4205_EmpGarnVndr where BIRUNID ='",V.global.lBIRunID,"'",V.Local.sSel)
+F.Intrinsic.String.Concat("delete from GCG_4205_EmpGarnVndr where BIRUNID <> 1", "",V.Local.sSel)
+F.ODBC.Connection!Con.Execute(V.Local.sSel)
+F.Intrinsic.Debug.Stop
+'save udt to table
+F.Intrinsic.String.Concat("select * from GCG_4205_EmpGarnVndr where BIRUNID='",V.global.lBIRunID,"'",V.Local.sSel)
+F.ODBC.Connection!Con.OpenLocalRecordsetRW("rstSel",V.Local.sSel)
+	F.Intrinsic.Variable.SaveUDTToRecordset("Con","rstSel","v.uGlobal.uEmpl")
+F.ODBC.Con!rstSel.Close
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildReportTable_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: gcg_4205_empgarnvndr_rpt.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildReportTable.End
+
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Employee Garnishment by Vendor Report
+SS_Form1.CTRL{{NAME::dtpPayDte\\TYPE::6\\CAPTION::Pay Date\\TABSTOP::1\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdPrnt\\TYPE::5\\CAPTION::Print\\TABSTOP::2\\GROUP::2\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_3626_EmpGarnishment_Vndr_rpt.ga$}$JCT$}$6/28/2012$}$False
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$For Cadilalc Products
+Quote 3626
+A maintenance screen and table to assign Vendor Id's to Garnishment codes for employees. A report that prints the Employee, Garnishment-Vendor code information.
+Program.Sub.Comments.End
+
